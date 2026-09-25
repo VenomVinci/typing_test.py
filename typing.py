@@ -5,17 +5,15 @@ import random
 
 # Sentences the player can type
 SENTENCES = [
-    "The future belongs to people who are willing to build it.",
-    "Small progress every day can lead to something incredible.",
-    "Learning to code is easier when you build real projects.",
-    "Artificial intelligence will change the way we solve problems.",
-    "The best way to learn programming is to actually write code.",
-    "Every great project starts with a simple idea and a first step.",
+    "Deep learning allows neural networks to learn complex patterns from large amounts of data.",
+    "Artificial intelligence is changing how we solve problems and build intelligent systems.",
+    "Neural networks are inspired by the way biological neurons process information.",
+    "Large language models can learn patterns in text and generate human-like responses.",
+    "Machine learning allows computers to learn from data without being explicitly programmed.",
 ]
 
 
 def typing_test(stdscr):
-    # Hide the blinking cursor
     curses.curs_set(0)
 
     # Enable colors
@@ -25,7 +23,6 @@ def typing_test(stdscr):
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_CYAN, curses.COLOR_BLACK)
     curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK)
-    # Pick a random sentence
     sentence = random.choice(SENTENCES)
 
     typed = ""
@@ -38,11 +35,8 @@ def typing_test(stdscr):
         # Clear the screen
         stdscr.clear()
 
-        # -------------------------
-        # TITLE
-        # -------------------------
 
-        title = "⚡ PYTHON TYPING LAB ⚡"
+        title = " PYTHON TYPING LAB "
 
         stdscr.addstr(
             1,
@@ -57,9 +51,7 @@ def typing_test(stdscr):
             "Type the sentence below. Don't worry about mistakes — just keep going."
         )
 
-        # -------------------------
-        # TIMER
-        # -------------------------
+        # TIMER    
 
         if start_time is None:
             elapsed = 0
@@ -74,9 +66,7 @@ def typing_test(stdscr):
         else:
             wpm = 0
 
-        # -------------------------
-        # STATS
-        # -------------------------
+       # STATS    
 
         stdscr.addstr(
             5,
@@ -84,9 +74,7 @@ def typing_test(stdscr):
             f"TIME: {elapsed:05.1f}s    WPM: {wpm}"
         )
 
-        # -------------------------
-        # SENTENCE
-        # -------------------------
+    
 
         stdscr.addstr(8, 2, "TARGET:")
 
@@ -119,9 +107,7 @@ def typing_test(stdscr):
                     curses.color_pair(2)
                 )
 
-        # -------------------------
-        # TYPED TEXT
-        # -------------------------
+      
 
         stdscr.addstr(12, 2, "YOU:")
 
@@ -131,9 +117,7 @@ def typing_test(stdscr):
             typed
         )
 
-        # -------------------------
-        # PROGRESS
-        # -------------------------
+        
 
         progress = len(typed)
         total = len(sentence)
@@ -146,9 +130,7 @@ def typing_test(stdscr):
             f"PROGRESS: {percentage}%"
         )
 
-        # -------------------------
         # INSTRUCTIONS
-        # -------------------------
 
         stdscr.addstr(
             curses.LINES - 2,
@@ -164,49 +146,36 @@ def typing_test(stdscr):
 
         key = stdscr.getch()
 
-        # -------------------------
         # START TIMER
-        # -------------------------
 
         if key != -1 and start_time is None:
             start_time = time.time()
 
-        # -------------------------
         # ESCAPE
-        # -------------------------
 
         if key == 27:
             break
 
-        # -------------------------
         # BACKSPACE
-        # -------------------------
 
         elif key in (curses.KEY_BACKSPACE, 127, 8):
 
             if typed:
                 typed = typed[:-1]
 
-        # -------------------------
         # NORMAL CHARACTER
-        # -------------------------
+        
 
         elif key != -1 and 32 <= key <= 126:
 
             if len(typed) < len(sentence):
                 typed += chr(key)
 
-        # -------------------------
         # CHECK COMPLETION
-        # -------------------------
 
         if len(typed) == len(sentence):
 
             finished = True
-
-    # -------------------------
-    # RESULTS
-    # -------------------------
 
     stdscr.clear()
 
@@ -230,14 +199,12 @@ def typing_test(stdscr):
     else:
         final_wpm = 0
 
-    # -------------------------
-    # RESULT SCREEN
-    # -------------------------
+    
 
     stdscr.addstr(
         3,
         2,
-        "🏁 TEST COMPLETE!",
+        " TEST COMPLETE!",
         curses.color_pair(3) | curses.A_BOLD
     )
 
@@ -270,5 +237,5 @@ def typing_test(stdscr):
     stdscr.getch()
 
 
-# Run the program
+
 curses.wrapper(typing_test)
